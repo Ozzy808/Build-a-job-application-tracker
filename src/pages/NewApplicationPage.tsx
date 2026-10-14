@@ -5,6 +5,7 @@ import type { Stage } from "../types";
 import { useApplications } from "../hooks/useApplications";
 import { STAGES } from "../lib/applications";
 import { STAGE_LABELS } from "../components/StageBadge";
+import { ArrowLeft, Check, Sparkles } from "lucide-react";
 
 type FormValues = {
   company: string; role: string; link: string;
@@ -17,15 +18,15 @@ function Field({ id, label, error, children }: {
   id: string; label: string; error?: string; children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-1">
-      <label htmlFor={id} className="block text-sm font-medium">{label}</label>
+    <div className="space-y-2">
+      <label htmlFor={id} className="block text-sm font-semibold text-slate-700 dark:text-slate-200">{label}</label>
       {children}
-      {error && <p id={`${id}-error`} role="alert" className="text-sm text-red-700 dark:text-red-300">{error}</p>}
+      {error && <p id={`${id}-error`} role="alert" className="text-sm text-rose-700 dark:text-rose-300">{error}</p>}
     </div>
   );
 }
 
-const inputClass = "w-full rounded-md border bg-transparent p-2 aria-[invalid=true]:border-red-600";
+const inputClass = "w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-500/10 aria-[invalid=true]:border-rose-500 dark:border-slate-700 dark:bg-slate-950 dark:focus:bg-slate-950";
 
 export function NewApplicationPage() {
   const navigate = useNavigate();
@@ -56,11 +57,15 @@ export function NewApplicationPage() {
   }
 
   return (
-    <section className="space-y-4">
-      <Link to="/" className="text-sm underline">← Back to all applications</Link>
-      <h1 className="text-2xl font-bold">Add an application</h1>
+    <section className="mx-auto max-w-3xl space-y-6">
+      <Link to="/" className="inline-flex items-center gap-2 rounded-lg text-sm font-semibold text-slate-500 transition hover:text-blue-700 dark:text-slate-400 dark:hover:text-blue-300"><ArrowLeft size={16} /> Back to opportunities</Link>
+      <header className="rounded-3xl bg-gradient-to-br from-[#14213d] to-[#1d3b70] px-6 py-7 text-white sm:px-8">
+        <span className="mb-3 inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-blue-200"><Sparkles size={14} /> NEW OPPORTUNITY</span>
+        <h1 className="text-3xl font-bold tracking-tight">Add an application</h1>
+        <p className="mt-2 text-sm text-blue-100/75">Capture the details now, keep your next step clear.</p>
+      </header>
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5 rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm shadow-slate-900/[0.03] sm:p-8 dark:border-slate-800 dark:bg-slate-900">
         <Field id="company" label="Company" error={errors.company?.message}>
           <input
             id="company"
@@ -122,12 +127,13 @@ export function NewApplicationPage() {
           <textarea id="notes" rows={4} className={inputClass} {...register("notes")} />
         </Field>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:justify-end dark:border-slate-800">
           <button type="submit" disabled={isSubmitting}
-            className="rounded-md bg-blue-700 px-4 py-2 font-semibold text-white disabled:opacity-50">
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500 disabled:opacity-50">
+            <Check size={17} />
             {isSubmitting ? "Saving…" : "Save application"}
           </button>
-          <Link to="/" className="rounded-md border px-4 py-2 font-semibold">Cancel</Link>
+          <Link to="/" className="rounded-xl border border-slate-200 px-5 py-3 text-center text-sm font-semibold text-slate-600 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Cancel</Link>
         </div>
       </form>
     </section>

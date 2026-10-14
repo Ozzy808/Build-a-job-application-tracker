@@ -9,16 +9,16 @@ export const STAGE_LABELS: Record<Stage, string> = {
 };
 
 const STYLES: Record<Stage, string> = {
-  wishlist: "bg-slate-200 text-slate-900 dark:bg-slate-700 dark:text-slate-100",
-  applied: "bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100",
-  interview: "bg-amber-100 text-amber-900 dark:bg-amber-900 dark:text-amber-100",
-  offer: "bg-green-100 text-green-900 dark:bg-green-900 dark:text-green-100",
-  closed: "bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-100",
+  wishlist: "bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700",
+  applied: "bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:ring-blue-900",
+  interview: "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:ring-amber-900",
+  offer: "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:ring-emerald-900",
+  closed: "bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200 dark:bg-rose-950 dark:text-rose-300 dark:ring-rose-900",
 };
 
 export function StageBadge({ stage }: { stage: Stage }) {
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${STYLES[stage]}`}>
+    <span className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${STYLES[stage]}`}>
       {STAGE_LABELS[stage]}
     </span>
   );

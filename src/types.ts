@@ -5,10 +5,10 @@ export interface Application {
   company: string;
   role: string;
   link?: string;
-  dateSent: string; // YYYY-MM-DD
+  dateSent: string; 
   stage: Stage;
   notes?: string;
-  createdAt: string; // ISO timestamp
+  createdAt: string; 
 }
 
 export type NewApplication = Omit<Application, "id" | "createdAt">;
